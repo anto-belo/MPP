@@ -52,10 +52,13 @@ namespace MPP_1
 
         public bool IsReadyToStop()
         {
+            bool isReady;
             lock (_locker)
             {
-                return _workingThreads == 0 && _tasks.Count == 0;
+                isReady = _workingThreads == 0 && _tasks.Count == 0;
             }
+
+            return isReady;
         }
 
         public void EnqueueTaskDelegate(TaskDelegate task)
