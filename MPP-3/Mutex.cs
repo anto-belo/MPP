@@ -14,15 +14,12 @@ namespace MPP_3
             {
                 Thread.Sleep(10);
             }
-
-            Console.WriteLine("Locked by #" + id);
         }
 
         public void Unlock()
         {
             int id = Thread.CurrentThread.ManagedThreadId;
             Interlocked.CompareExchange(ref _usedBy, 0, id);
-            Console.WriteLine("Unlocked by #" + id);
         }
     }
 }

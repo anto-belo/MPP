@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace MPP_3
 {
@@ -12,8 +13,11 @@ namespace MPP_3
                 new Thread(() =>
                     {
                         m.Lock();
-                        Thread.Sleep(400);
+                        Console.WriteLine("Locked by #" + Thread.CurrentThread.ManagedThreadId);
+                        Thread.Sleep(1000);
                         m.Unlock();
+                        Console.WriteLine("Unlocked by #" + Thread.CurrentThread.ManagedThreadId);
+
                     }
                 ).Start();
             }

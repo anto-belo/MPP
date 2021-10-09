@@ -13,16 +13,18 @@ namespace MPP_2
         public static void Main(string[] args)
         {
             _copyQueue = new TaskQueue(3);
-            if (args.Length != 2)
-            {
-                Console.WriteLine("src and out paths required.");
-                return;
-            }
-
-            args[0] = args[0].Replace("\\", "\\\\");
-            args[1] = args[1].Replace("\\", "\\\\");
-
-            CopyDirectory(args[0], args[1]);
+            // if (args.Length != 2)
+            // {
+            //     Console.WriteLine("src and out paths required.");
+            //     return;
+            // }
+            //
+            // args[0] = args[0].Replace("\\", "\\\\");
+            // args[1] = args[1].Replace("\\", "\\\\");
+            //
+            // CopyDirectory(args[0], args[1]);
+            
+            CopyDirectory("D:\\7-Zip","C:\\Users\\anton\\Desktop\\7-Zip");
 
             while (!_copyQueue.IsReadyToStop())
             {
@@ -51,7 +53,7 @@ namespace MPP_2
             {
                 string curDest = destPath;
                 _copyQueue.EnqueueTaskDelegate(() => { file.CopyTo(curDest + file.Name, true); });
-                Interlocked.Increment(ref _copiedFilesAmount);
+                _copiedFilesAmount++;
             }
 
             foreach (DirectoryInfo directory in srcDir.GetDirectories())

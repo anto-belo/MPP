@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPP-5", "MPP-5\MPP-5.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPP-8", "MPP-8\MPP-8.csproj", "{871088D7-2C39-4380-AB64-0A6DDE03DA9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPP-9", "MPP-9\MPP-9.csproj", "{66BE4C28-97CD-40AE-ACC7-3C8C82910BC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{871088D7-2C39-4380-AB64-0A6DDE03DA9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{871088D7-2C39-4380-AB64-0A6DDE03DA9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{871088D7-2C39-4380-AB64-0A6DDE03DA9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66BE4C28-97CD-40AE-ACC7-3C8C82910BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BE4C28-97CD-40AE-ACC7-3C8C82910BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BE4C28-97CD-40AE-ACC7-3C8C82910BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BE4C28-97CD-40AE-ACC7-3C8C82910BC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
