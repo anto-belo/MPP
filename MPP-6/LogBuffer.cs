@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MPP_6
 {
@@ -13,11 +14,12 @@ namespace MPP_6
         private StreamWriter _writer;
         private int _timer;
         private bool _stop;
-        private readonly List<string> _buffer;
+        private readonly Queue<string> _buffer;
+        private readonly object _locker = new();
 
         public LogBuffer()
         {
-            _buffer = new List<string>();
+            _buffer = new Queue<string>();
         }
 
         public void Start()
@@ -43,27 +45,29 @@ namespace MPP_6
             _writer.Close();
         }
 
-        private void Add(string item)
+        private async void Add(string item)
         {
-            _buffer.Add(item);
+            _buffer.Enqueue(item);
             _timer = 0;
             if (_buffer.Count >= MsgLimit)
             {
-                Console.WriteLine("FLUSH");
-                Flush();
+                await Task.Run(Flush);
             }
         }
 
         private void Flush()
         {
-            int logCount = _buffer.Count;
-            for (int i = 0; i < logCount; i++)
+            lock (_locker)
             {
-                Console.WriteLine("PRINTING " + _buffer[0]);
-                _writer.WriteLine(_buffer[0]);
-                _buffer.RemoveAt(0);
+                Console.WriteLine("FLUSH");
+                int logCount = _buffer.Count;
+                for (int i = 0; i < logCount; i++)
+                {
+                    _writer.WriteLine(_buffer.Dequeue());
+                }
+
+                _writer.Flush();
             }
-            _writer.Flush();
         }
 
         private void Listener()
@@ -73,7 +77,6 @@ namespace MPP_6
                 _timer++;
                 if (_timer == TimeLimit)
                 {
-                    Console.WriteLine("FLUSH");
                     Flush();
                     _timer = 0;
                 }
